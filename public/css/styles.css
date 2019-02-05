@@ -1,0 +1,115 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #f5f6f8;
+}
+
+/* form label {
+  display: block;
+} */
+
+label {
+  display: inline-block;
+  text-align: right;
+  width: 200px;
+}
+
+input, textarea {
+  width: 300px;
+  border: 1px solid #999;
+}
+
+form div + div {
+  margin-top: 15px;
+}
+
+.container {
+  background-color: #f5f6f8;
+  margin: 20px auto;
+  text-align: center;
+  max-width: 960px;
+  box-sizing: border-box;
+}
+
+.required {
+  color: red;
+}
+
+.form__input {
+  padding: 6px 10px 0 15px;
+  line-height: 25px;
+  height: 28px;
+  font-size: 15px;
+}
+
+.button.form__button {
+  padding-top: 12px;
+  padding-bottom: 4px;
+  line-height: 19px;
+}
+
+.signup__title {
+  border-bottom: 2px solid #000;
+  width: 800px;
+  text-align: center;
+  margin: 20px auto;
+}
+
+.button {
+  padding: 15px;
+  background: #fff;
+  border: 0;
+  width: 100px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.12);
+  border: 1px solid #c4c4c4;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: #e0e0e0;
+  color: #fff;
+}
+
+.btn__area {
+  margin: 15px 0 0 82px;
+}
+
+.button.signup {
+  background-color: red;
+  color: #fff;
+  font-weight: 700;
+  text-align: center;
+}
+
+.button.signup:hover {
+  background-color: #b61613;
+}
+
+.ml-10 {
+  margin-left: 10px;
+}
+
+.ml-105 {
+  margin-left: 105px;
+}
+
+.ml-110 {
+  margin-left: 110px;
+}
+
+.ml-200 {
+  margin-left: 200px;
+}
+
+.ml-205 {
+  margin-left: 205px;
+}
+
+.mr-20 {
+  margin-right: 20px;
+}
+

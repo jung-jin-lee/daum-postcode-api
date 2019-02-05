@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>회원가입</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1 class="signup__title">회원가입</h1>
+    <form id="signup-form">
+    </form>
+    <div class="btn__area">
+      <button type="button" class="button signup" title="클릭 시, 회원가입">회원가입</button>
+      <button type="button" class="button" title="이전 페이지로 돌아가기">취소</button>
+    </div>
+  </div>
+  <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+  <script>
+    var generateFormItemHTML = function (data) {
+      var labelHTML = data.useLabel ? 
+        '<label for="' + data.id + '" class="' + data.labelClass +'">' +
+          '<span class="mr-20"><strong class="required">*</strong>' + data.name + ':</span>' +
+        '</label>' 
+        : ''
+      var inputHTML = '<input type="text" placeholder' + data.inputPlaceholder + ' class="form__input ' + data.inputClass + '" id="' + data.id + '"' + (data.disabled ? 'disabled' : '') + ' />'
+      var buttonHTML = data.buttonID ? 
+        '<button type="button"  class="button form__button ml-10" id="' + data.buttonID + '">' + data.buttonName + '</button>' 
+        : ''
+      var html = 
+      '<div>' +
+        labelHTML +
+        inputHTML + 
+        buttonHTML +
+      '</div>'
+      
+      return html
+    }
+
+    var generateFormHTML = function (formItems) {
+      return formItems.reduce((previousHTML, currentHTML) => {
+        return previousHTML + generateFormItemHTML(currentHTML)
+      }, '')
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      var formItems = [
+        { useLabel: true, inputPlaceholder: '', id: 'user-name', name: '이름', labelClass: '', inputClass: '', disabled: false  },
+        { useLabel: true, inputPlaceholder: '', id: 'user-id', name: '아이디', labelClass: '', inputClass: '', disabled: false  },
+        { useLabel: true, inputPlaceholder: '', id: 'user-password', name: '비밀번호', labelClass: '', inputClass: '', disabled: false  },
+        { useLabel: true, inputPlaceholder: '', id: 'user-password-confirm', name: '비밀번호 확인', labelClass: '', inputClass: '', disabled: false  },
+        { useLabel: true, inputPlaceholder: '', id: 'user-address', name: '주소', labelClass: 'ml-110', inputClass: '', disabled: true, buttonID: 'find-address-button', buttonName: '주소 찾기'  },
+        { useLabel: false, inputPlaceholder: '상세 주소 입력', id: 'user-address-rest', name: '비밀번호 확인', labelClass: '', inputClass: 'ml-200', disabled: false  },
+      ]
+      
+      var $signupForm = document.querySelector('#signup-form')
+      $signupForm.innerHTML = generateFormHTML(formItems)
+    })
+    window.addEventListener('load', function () {
+      console.log('load')
+      var $findAddressButton = document.querySelector('#find-address-button')
+      $findAddressButton.addEventListener('click', function (event) {
+        new daum.Postcode({
+          oncomplete: function(data) {
+              console.log('[oncomplete]data:', data)
+              var userAddress = data.userSelectedType === 'R' ? data.roadAddress : data.jibunAddress
+              var $userAddress = document.querySelector('#user-address')
+              var $userAddressRest = document.querySelector('#user-address-rest')
+              $userAddress.value = userAddress
+          }
+        }).open();
+      })
+    })
+  </script>
+</body>
+</html>
